@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "chapa": "^1.0.5",
+    "chapa-nodejs": "^1.2.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongoose": "^7.1.1"
