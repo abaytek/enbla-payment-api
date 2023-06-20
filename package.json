@@ -7,7 +7,7 @@
   "author": "=abaysew <abaysewtekle@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "chapa": "^1.0.5",
