@@ -6,6 +6,9 @@
   "repository": "git@github.com:abaytek/enbla-payment-api.git",
   "author": "=abaysew <abaysewtekle@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "start": "node server.js"
   },
