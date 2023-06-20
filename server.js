@@ -14,7 +14,7 @@ app.use("/api/payment/", paymentRoute);
 app.use("/api/order/", orderRoute);
 
 const PORT = process.env.PORT;
-const MONGO_URL = process.env.MONGO_URL_LOCAL;
+const MONGO_URL = process.env.MONGO_URL;
 app.listen(PORT, () => {
   connectMongoDb(MONGO_URL);
   console.log(`Server is running`);

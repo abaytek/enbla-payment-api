@@ -14,7 +14,7 @@ export const payWithChapa = async (req, res) => {
     first_name,
     last_name,
     callback_url: "http://localhost:8800/api/payment/verify",
-    return_url: `https://google.com`,
+    return_url: `http://google.com`,
     customization: {
       title: "Enbla Payment",
       description: "It is time to pay and eat",
@@ -43,8 +43,11 @@ export const verifyPayment = async (req, res) => {
   const { tx_ref } = req.body;
   try {
     let response = await myChapa.verify(tx_ref);
-    if (response.data.status == "success") {
-      await Order.findOneAndUpdate(
+    console.log(response?.data?.status)
+    if (response?.data?.status !== "success") {
+      return res.status(203).json("failed");
+    } 
+    await Order.findOneAndUpdate(
         { tx_ref: response.data?.tx_ref },
         {
           $set: {
@@ -56,10 +59,7 @@ export const verifyPayment = async (req, res) => {
         },
         { new: true }
       );
-      return res.status(200).json("success");
-    } else if (response.data?.status == "failed") {
-      return res.status(203).json("failed");
-    }
+    res.status(200).json("success");
   } catch (err) {
     res.status(500).json("Something Wrong");
   }

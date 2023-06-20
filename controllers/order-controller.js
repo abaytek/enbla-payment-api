@@ -24,3 +24,29 @@ export const getLatestOrders = (req, res) => {
       res.status(404).json(error);
     });
 };
+
+export const getTotalSell = (req, res) => {
+  Order.aggregate([
+    {
+      $group: {
+        _id: null,
+        totalAmount: { $sum: "$totalPrice" }
+      }
+    }
+  ])
+  .then(result => {
+    res.status(200).json(result[0].totalAmount)
+    console.log(result);
+    // Output: [{ _id: null, totalAmount: 1234.56 }]
+  })
+  .catch(err => {
+    console.error(err);
+  });
+}
+
+
+export const getTotalOrders = (req, res) => {
+  Order.find({paymentStatus:"completed"})
+  .then(result => res.status(200).json(result.length))
+  .catch(err => console.log(err))
+}
