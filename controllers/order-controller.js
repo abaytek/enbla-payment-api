@@ -1,7 +1,7 @@
 import Order from "../models/order.model.js";
 
 export const getOrders = (req, res) => {
-  Order.find()
+  Order.find().sort({orderDate: -1})
     .then((orders) => res.status(200).json(orders))
     .catch((err) => res.status(404).json(err));
 };
@@ -9,6 +9,7 @@ export const getOrders = (req, res) => {
 export const getOrderById = (req, res) => {
   const userId = req.params.userId;
   Order.find({ customerId: userId })
+    .sort({orderDate: -1})
     .then((order) => res.status(200).json(order))
     .catch((err) => res.status(404).json("No order with this id"));
 };
