@@ -26,14 +26,16 @@ export const getLatestOrders = (req, res) => {
 };
 
 export const getTotalSell = (req, res) => {
-  Order.find({paymentStatus: "completed"}).aggregate([
-    {
-      $group: {
-        _id: null,
-        totalAmount: { $sum: "$totalPrice" }
+  Order.find({paymentStatus: "completed"}).then(orders => {
+     orders.aggregate([
+      {
+        $group: {
+          _id: null,
+          totalAmount: { $sum: "$totalPrice" }
+        }
       }
-    }
-  ])
+    ])
+  })
   .then(result => {
     res.status(200).json(result[0].totalAmount)
     console.log(result);
