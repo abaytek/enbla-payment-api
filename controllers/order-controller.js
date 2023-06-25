@@ -26,7 +26,7 @@ export const getLatestOrders = (req, res) => {
 };
 
 export const getTotalSell = (req, res) => {
-  Order.aggregate([
+  Order.find({paymentStatus: "completed"}).aggregate([
     {
       $group: {
         _id: null,
