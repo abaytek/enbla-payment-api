@@ -7,6 +7,8 @@ export const payWithChapa = async (req, res) => {
   const { products, customerId, shippingAddress, customer, currency, amount } =
     req.body;
   const { first_name, last_name, email } = customer;
+  const url = 'exp://192.168.43.214:19000/--/OrderConfirmed'
+  const encodedUrl = encodeURIComponent(returnUrl)
   const customerInfo = {
     amount,
     currency,
@@ -14,7 +16,7 @@ export const payWithChapa = async (req, res) => {
     first_name,
     last_name,
     callback_url: "http://localhost:8800/api/payment/verify",
-    return_url: `exp://192.168.43.214:19000/`,
+    return_url: encodedUrl,
     // return_url: `exp://exp.host/@your-username/your-app-name?screen=Order`,
     customization: {
       title: "Enbla Payment",
