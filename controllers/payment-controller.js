@@ -14,7 +14,7 @@ export const payWithChapa = async (req, res) => {
     first_name,
     last_name,
     callback_url: "http://localhost:8800/api/payment/verify",
-    return_url: `exp://192.168.0.100:19000/`,
+    return_url: `exp://192.168.43.214:19000/`,
     // return_url: `exp://exp.host/@your-username/your-app-name?screen=Order`,
     customization: {
       title: "Enbla Payment",
