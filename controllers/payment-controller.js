@@ -8,7 +8,7 @@ export const payWithChapa = async (req, res) => {
     req.body;
   const { first_name, last_name, email } = customer;
   const url = 'exp://192.168.43.214:19000/'
-  const encodedUrl = encodeURIComponent(returnUrl)
+  const encodedUrl = encodeURIComponent(url)
   const customerInfo = {
     amount,
     currency,
