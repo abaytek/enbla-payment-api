@@ -7,7 +7,7 @@ export const payWithChapa = async (req, res) => {
   const { products, customerId, shippingAddress, customer, currency, amount } =
     req.body;
   const { first_name, last_name, email } = customer;
-  const url = 'exp://192.168.43.214:19000/--/OrderConfirmed'
+  const url = 'exp://192.168.43.214:19000/'
   const encodedUrl = encodeURIComponent(returnUrl)
   const customerInfo = {
     amount,
@@ -51,7 +51,7 @@ export const verifyPayment = async (req, res) => {
       return res.status(203).json("failed");
     } 
     await Order.findOneAndUpdate(
-        { tx_ref: response.data?.tx_ref },
+        { tx_ref: response?.data?.tx_ref },
         {
           $set: {
             paymentStatus: "completed",
