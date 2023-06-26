@@ -16,7 +16,7 @@ export const payWithChapa = async (req, res) => {
     first_name,
     last_name,
     callback_url: "http://localhost:8800/api/payment/verify",
-    return_url: encodedUrl,
+    return_url: "https://www.google.com",
     // return_url: `exp://exp.host/@your-username/your-app-name?screen=Order`,
     customization: {
       title: "Enbla Payment",
@@ -36,6 +36,18 @@ export const payWithChapa = async (req, res) => {
       tx_ref: response.tx_ref,
     });
     await newOrder.save();
+    await Order.findOneAndUpdate(
+        { tx_ref: response?.tx_ref },
+        {
+          $set: {
+            paymentStatus: "completed",
+            orderDate: response.data.updated_at,
+            createdAt: response.data.created_at,
+            updatedAt: response.data.updated_at,
+          },
+        },
+        { new: true }
+      );
     return res.status(200).json(response);
   } catch (error) {
     res.status(500).json(error.message);
